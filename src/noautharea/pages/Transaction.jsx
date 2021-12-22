@@ -148,7 +148,7 @@ const Transaction = () => {
                   {formState === 0 ? (
                     <section>
                       <div className="d-flex justify-content-center">
-                        <div>
+                        <div style={{ width: "100%" }}>
                           <div className="product-information">
                             <div className="mb-4">
                               <label htmlFor="Category">Category</label>
@@ -440,6 +440,9 @@ const Transaction = () => {
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div className="d-flex justify-content-end mt-4">
+                        <button className="btn btn-primary">Next</button>
                       </div>
                     </section>
                   ) : (
