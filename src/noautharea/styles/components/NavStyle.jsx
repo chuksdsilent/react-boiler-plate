@@ -8,7 +8,7 @@ export const NavStyle = styled.header`
     justify-content: space-between;
     align-items: center;
     padding-left: 4.7rem;
-    display: block;
+
     a {
       color: white;
       margin-right: 1.7rem;
@@ -21,7 +21,7 @@ export const NavStyle = styled.header`
 
       img {
         align-items: center;
-        margin-top: 1.5rem;
+        margin-top: 0.5rem;
       }
     }
   }
@@ -52,7 +52,7 @@ export const NavStyle = styled.header`
       }
       .display-links {
         display: block;
-        animation: openMenu 1s;
+        /* animation: openMenu 1s; */
 
         @keyframes openMenu {
           from {
@@ -64,7 +64,7 @@ export const NavStyle = styled.header`
         }
       }
       .no-display-links {
-        animation: closeMenu 1s;
+        /* animation: closeMenu 1s; */
         @keyframes closeMenu {
           from {
             height: 500px;
