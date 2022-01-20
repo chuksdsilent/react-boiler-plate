@@ -149,7 +149,15 @@ const Transaction = () => {
                     <section>
                       <div className="d-flex justify-content-center">
                         <div style={{ width: "100%" }}>
-                          <div className="product-information">
+                          <div
+                            is
+                            your
+                            role
+                            in
+                            this
+                            Transaction
+                            className="product-information"
+                          >
                             <div className="mb-4">
                               <label htmlFor="Category">Category</label>
                               <select
@@ -415,7 +423,6 @@ const Transaction = () => {
                                 name="flexRadioDefault"
                                 id="flexRadioDefault1"
                                 value="1"
-                                onChange={handleChange}
                               />
                               <label
                                 className="label-style"
@@ -430,7 +437,6 @@ const Transaction = () => {
                                 name="flexRadioDefault"
                                 id="flexRadioDefault1"
                                 value="2"
-                                onChange={handleChange}
                               />
                               <label
                                 className="label-style"
@@ -442,7 +448,12 @@ const Transaction = () => {
                         </div>
                       </div>
                       <div className="d-flex justify-content-end mt-4">
-                        <button className="btn btn-primary">Next</button>
+                        <button
+                          onClick={() => nextForm(1)}
+                          className="btn btn-primary"
+                        >
+                          Next
+                        </button>
                       </div>
                     </section>
                   ) : (
@@ -635,12 +646,7 @@ const Transaction = () => {
                         >
                           Back
                         </button>
-                        <button
-                          className="btn btn-primary"
-                          onClick={() => nextForm(3)}
-                        >
-                          Next
-                        </button>
+                        <button className="btn btn-primary">Submit</button>
                       </div>
                     </div>
                   ) : (
