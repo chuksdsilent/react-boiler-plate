@@ -1,3 +1,5 @@
+import { UserServices } from "../../services/UserService";
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { Header } from "../styles/components/Header";
@@ -12,6 +14,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
+import { convertPicturetoBase64 } from "../../shared/common";
 
 const Transaction = () => {
   // role
@@ -21,26 +24,27 @@ const Transaction = () => {
   const [formState, setFormState] = useState(0);
 
   // Form inputs
-  const [buyerFirstName, setBuyerFirstName] = useState("");
-  const [buyerSurname, setBuyerSurname] = useState("");
-  const [buyerEmail, setBuyerEmail] = useState("");
-  const [buyerPhone, setBuyerPhone] = useState("");
-  const [sellerFirstName, setSellerFirstName] = useState("");
-  const [sellerSurname, setSellerSurname] = useState("");
-  const [sellerEmail, setSellerEmail] = useState("");
-  const [sellerPhone, setSellerPhone] = useState("");
-  const [productTitle, setProductTitle] = useState("");
-  const [totalTransactionCost, setTotalTransactionCost] = useState("");
-  const [totalDuration, setTotalDuration] = useState("");
-  const [detailsOfProduct, setDetailsOfProduct] = useState("");
+  const [video, setVido] = useState("");
+  const [image_one, setImage_One] = useState("");
+  const [image_two, setImage_Two] = useState("");
+  const [image_three, setImage_Three] = useState("");
+  const [buyer_name, setbuyer_name] = useState("");
+  const [buyer_email, setbuyer_email] = useState("");
+  const [buyer_phone, setbuyer_phone] = useState("");
+  const [seller_name, setseller_name] = useState("");
+  const [seller_email, setseller_email] = useState("");
+  const [seller_phone, setseller_phone] = useState("");
+  const [title_of_product, setTitleOfProduct] = useState("");
+  const [cost, setcost] = useState("");
+  const [due_date, setdue_date] = useState("");
+  const [details, setdetails] = useState("");
   const [isMilestone, setIsMilestone] = useState(false);
-  const [Inputs, setInputs] = useState(false);
-  const [categories, setCategories] = useState(0);
-  const [currency, setCurrency] = useState(0);
+  const [category, setcategory] = useState(0);
+  const [currency, setCurrency] = useState(5);
+  const [changeCategory, setChangeCategory] = useState(1);
   const [isEmailAvailable, setIsEmailAvailable] = useState(true);
-  const [isSellerEmailAvailable, setIsSellerEmailAvailable] = useState(true);
+  const [isseller_emailAvailable, setIsseller_emailAvailable] = useState(true);
 
-  
   const [milestones, setMilestones] = useState([
     { title: "", description: "" },
   ]);
@@ -51,7 +55,6 @@ const Transaction = () => {
     },
   ]);
 
-  let title;
   const handleChange = (e) => {
     const target = e.target;
     if (target.checked) {
@@ -90,19 +93,20 @@ const Transaction = () => {
     if (index > 0) values.splice(index, 1);
     setPictures(values);
   };
+  let title = "";
   const selectCategory = (event) => {
     console.log("category selected ----->", event.target.value);
-    setCategories(event.target.value);
-    console.log(" selected category----->", categories);
+    setChangeCategory(event.target.value);
+    console.log(" selected category----->", category);
   };
 
-  if (categories === "1") {
+  if (changeCategory === "1") {
     title = "Product";
     console.log("the title is ---->", title);
-  } else if (categories === "2") {
+  } else if (changeCategory === "2") {
     title = "Service";
     console.log("the title is ---->", title);
-  } else if (categories === "3") {
+  } else if (changeCategory === "3") {
     title = "Digital Product";
     console.log("the title is ---->", title);
   }
@@ -127,9 +131,56 @@ const Transaction = () => {
     }
   };
 
+  const uploadVideo = (event) => {
+    convertPicturetoBase64(event.target.files[0], (result) => {
+      setVido(result);
+    });
+    console.log("Video Uploaded...");
+  };
+  const uploadFile = (index, event) => {
+    convertPicturetoBase64(event.target.files[0], (result) => {
+      if (index === 0) setImage_One(result);
+      else if (index === 1) setImage_Two(result);
+      else if (index === 2) setImage_Three(result);
+      else setImage_Three(result);
+    });
+    console.log("image Uploaded...");
+  };
+
+  const dueDate = (date, dateString) => {
+    console.log(dateString);
+    setdue_date(dateString);
+  };
   const handleSubmit = () => {
-    console.log("form summited....");
-  }
+    const formValues = {
+      buyer_name,
+      buyer_email,
+      buyer_phone,
+      seller_name,
+      seller_email,
+      seller_phone,
+      title_of_product,
+      cost,
+      due_date,
+      details,
+      changeCategory,
+      currency,
+      image_one,
+      image_two,
+      image_three,
+      video,
+      role,
+    };
+    // UserServices.create("http://localhost:8000/api/user/create", formValues)
+    axios
+      .post("http://localhost:8000/api/user/create", formValues)
+      .then((respons) => {})
+      .catch((error) => {})
+      .finally(() => {
+        console.log("finished...");
+      });
+    console.log("form summited....", formValues);
+  };
   console.log(currency + "------>" + showCurrency());
   return (
     <TransactionStyle>
@@ -153,20 +204,12 @@ const Transaction = () => {
                     <section>
                       <div className="d-flex justify-content-center">
                         <div style={{ width: "100%" }}>
-                          <div
-                            is
-                            your
-                            role
-                            in
-                            this
-                            Transaction
-                            className="product-information"
-                          >
+                          <div className="product-information">
                             <div className="mb-4">
                               <label htmlFor="Category">Category</label>
                               <select
                                 name=""
-                                value={categories}
+                                value={category}
                                 onChange={(event) => selectCategory(event)}
                                 id=""
                                 className="form-control"
@@ -202,9 +245,9 @@ const Transaction = () => {
                                 <input
                                   type="text"
                                   className="form-control"
-                                  value={productTitle}
+                                  value={title_of_product}
                                   onChange={(e) =>
-                                    setProductTitle(e.target.value)
+                                    setTitleOfProduct(e.target.value)
                                   }
                                 />
                               </div>
@@ -222,10 +265,8 @@ const Transaction = () => {
                                   style={{ marginTop: 22 }}
                                   type="text"
                                   className="form-control"
-                                  value={detailsOfProduct}
-                                  onChange={(e) =>
-                                    setDetailsOfProduct(e.target.value)
-                                  }
+                                  value={details}
+                                  onChange={(e) => setdetails(e.target.value)}
                                 ></textarea>
                               </div>
                             </div>
@@ -243,10 +284,8 @@ const Transaction = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    value={totalTransactionCost}
-                                    onChange={(e) =>
-                                      setTotalTransactionCost(e.target.value)
-                                    }
+                                    value={cost}
+                                    onChange={(e) => setcost(e.target.value)}
                                   />
                                 </div>
                               </div>
@@ -255,7 +294,10 @@ const Transaction = () => {
                                   Total Duration of transaction
                                 </label>
 
-                                <DatePicker className="date-picker" />
+                                <DatePicker
+                                  className="date-picker"
+                                  onChange={dueDate}
+                                />
                               </div>
                             </div>
                           </div>
@@ -267,7 +309,12 @@ const Transaction = () => {
                               style={{ padding: 0 }}
                             >
                               <div className="mb-2">Upload Video</div>
-                              <input type="file" name="" id="" />
+                              <input
+                                type="file"
+                                name=""
+                                onChange={(e) => uploadVideo(e)}
+                                id=""
+                              />
                             </div>
                             <div className="mb-2"> Upload Pictures</div>
                             {pictures.map((picture, index) => (
@@ -279,7 +326,12 @@ const Transaction = () => {
                                 {index <= "2" ? (
                                   <div className="col-md-12 col-12">
                                     <div className="row">
-                                      <input type="file" name="" id="" />
+                                      <input
+                                        onChange={(e) => uploadFile(index, e)}
+                                        type="file"
+                                        name=""
+                                        id=""
+                                      />
                                       <IconButton
                                         onClick={(e) => removePicture(index)}
                                       >
@@ -303,7 +355,7 @@ const Transaction = () => {
 
                           <div>
                             <div>
-                              {categories === "2" ? (
+                              {category === "2" ? (
                                 <button
                                   className="btn btn-primary mb-4"
                                   onClick={() => setIsMilestone(!isMilestone)}
@@ -314,7 +366,7 @@ const Transaction = () => {
                                 ""
                               )}
                             </div>
-                            {categories === "2"
+                            {category === "2"
                               ? [
                                   isMilestone
                                     ? milestones.map((milestone, index) => (
@@ -426,7 +478,7 @@ const Transaction = () => {
                                 type="radio"
                                 name="flexRadioDefault"
                                 id="flexRadioDefault1"
-                                value="1"
+                                onChange={() => setRole("buyer")}
                               />
                               <label
                                 className="label-style"
@@ -440,7 +492,7 @@ const Transaction = () => {
                                 type="radio"
                                 name="flexRadioDefault"
                                 id="flexRadioDefault1"
-                                value="2"
+                                onChange={() => setRole("seller")}
                               />
                               <label
                                 className="label-style"
@@ -475,8 +527,8 @@ const Transaction = () => {
                           <input
                             type="text"
                             className="form-control"
-                            value={buyerFirstName}
-                            onChange={(e) => setBuyerFirstName(e.target.value)}
+                            value={buyer_name}
+                            onChange={(e) => setbuyer_name(e.target.value)}
                           />
                         </div>
                         <div className="col-md-6 col-12 col-xs-12 col-sm-12">
@@ -486,8 +538,8 @@ const Transaction = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                value={buyerEmail}
-                                onChange={(e) => setBuyerEmail(e.target.value)}
+                                value={buyer_email}
+                                onChange={(e) => setbuyer_email(e.target.value)}
                               />
                               <div>
                                 <span
@@ -538,8 +590,8 @@ const Transaction = () => {
 
                           <PhoneInput
                             style={{ width: "100%" }}
-                            value={buyerPhone}
-                            onChange={setBuyerPhone}
+                            value={buyer_phone}
+                            onChange={setbuyer_phone}
                             country="us"
                           />
                         </div>
@@ -569,24 +621,26 @@ const Transaction = () => {
                       <div className="row">
                         <div className="col-md-6 col-6">
                           <label htmlFor="Seller's First Name">
-                            Seller's First Name
+                            Seller's Name
                           </label>
                           <input
                             type="text"
                             className="form-control"
-                            value={sellerFirstName}
-                            onChange={(e) => setSellerFirstName(e.target.value)}
+                            value={seller_name}
+                            onChange={(e) => setseller_name(e.target.value)}
                           />
                         </div>
                         <div className="col-md-6 col-6">
                           <label htmlFor="Buyer's Email">Seller's Email</label>
-                          {isSellerEmailAvailable ? (
+                          {isseller_emailAvailable ? (
                             <div>
                               <input
                                 type="text"
                                 className="form-control"
-                                value={buyerEmail}
-                                onChange={(e) => setBuyerEmail(e.target.value)}
+                                value={seller_email}
+                                onChange={(e) =>
+                                  setseller_email(e.target.value)
+                                }
                               />
                               <div>
                                 <span
@@ -596,7 +650,9 @@ const Transaction = () => {
                                     textDecoration: "underline",
                                   }}
                                   onClick={() =>
-                                    setIsSellerEmailAvailable(!isEmailAvailable)
+                                    setIsseller_emailAvailable(
+                                      !isEmailAvailable
+                                    )
                                   }
                                 >
                                   No email? Use only phone number (carrier
@@ -608,7 +664,7 @@ const Transaction = () => {
                             ""
                           )}
                           <div>
-                            {!isSellerEmailAvailable ? (
+                            {!isseller_emailAvailable ? (
                               <div>
                                 <span
                                   style={{
@@ -617,8 +673,8 @@ const Transaction = () => {
                                     textDecoration: "underline",
                                   }}
                                   onClick={() =>
-                                    setIsSellerEmailAvailable(
-                                      !isSellerEmailAvailable
+                                    setIsseller_emailAvailable(
+                                      !isseller_emailAvailable
                                     )
                                   }
                                 >
@@ -637,8 +693,8 @@ const Transaction = () => {
                             Seller's Phone Number
                           </label>
                           <PhoneInput
-                            value={sellerPhone}
-                            onChange={setSellerPhone}
+                            value={seller_phone}
+                            onChange={setseller_phone}
                             country="us"
                           />
                         </div>
@@ -650,7 +706,12 @@ const Transaction = () => {
                         >
                           Back
                         </button>
-                        <button className="btn btn-primary">Submit</button>
+                        <button
+                          onClick={handleSubmit}
+                          className="btn btn-primary"
+                        >
+                          Submit
+                        </button>
                       </div>
                     </div>
                   ) : (
