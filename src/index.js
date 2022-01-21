@@ -12,12 +12,15 @@ import rootReducer from "./reducers";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
+import { BrowserRouter } from "react-router-dom";
 const store = createStore(rootReducer, composeWithDevTools);
 ReactDOM.render(
   <Provider store={store}>
-    <Theme>
-      <App />
-    </Theme>
+    <BrowserRouter>
+      <Theme>
+        <App />
+      </Theme>
+    </BrowserRouter>
   </Provider>,
 
   document.getElementById("root")

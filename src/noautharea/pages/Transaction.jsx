@@ -40,6 +40,7 @@ const Transaction = () => {
   const [isEmailAvailable, setIsEmailAvailable] = useState(true);
   const [isSellerEmailAvailable, setIsSellerEmailAvailable] = useState(true);
 
+  
   const [milestones, setMilestones] = useState([
     { title: "", description: "" },
   ]);
@@ -126,6 +127,9 @@ const Transaction = () => {
     }
   };
 
+  const handleSubmit = () => {
+    console.log("form summited....");
+  }
   console.log(currency + "------>" + showCurrency());
   return (
     <TransactionStyle>
