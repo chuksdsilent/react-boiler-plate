@@ -2,8 +2,8 @@ import RequestHandler from "./RequestHandler";
 import { API_URLS } from "../utils/api-url";
 
 class UserService {
-  create(path, data) {
-    return RequestHandler.post(path, data);
+  create(data) {
+    return RequestHandler.post(API_URLS.user.create, data);
   }
   authenticate(data) {
     return RequestHandler.post(API_URLS.user.authenticate, data);

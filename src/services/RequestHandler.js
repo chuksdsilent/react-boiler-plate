@@ -4,7 +4,8 @@ const BASE_URL = process.env.REACT_APP_DEV_BASE_URL;
 const PHOTO_URL = process.env.REACT_APP_PHOTO_URL;
 
 const post = (path, data) => {
-  const new_url = `${BASE_URL}/${path}`;
+  const new_url = `${BASE_URL}${path}`;
+  // const new_url = `${path}`;
   console.log(new_url);
   return axios.post(new_url, data || {});
 };
@@ -15,7 +16,7 @@ const post = (path, data) => {
  * @returns {Observable<any>}
  */
 const get = (path, token) => {
-  const new_url = `${BASE_URL}${path}`;
+  const new_url = `${path}`;
   return axios.get(new_url, token || {});
 };
 
@@ -25,13 +26,13 @@ const get = (path, token) => {
  * @param data
  * @returns {Observable<any>}
  */
-const put = (path, data) => {
-  const url = `${BASE_URL}${path}`;
-  return axios.patch(url, data);
+const put = (path, id, data) => {
+    const new_url = `${path}/${id}`;
+  return axios.patch(new_url, data);
 };
 
 const single = (path) => {
-  const new_url = `${BASE_URL}${path}`;
+    const new_url = `${path}`;
   return axios.get(new_url);
 };
 
@@ -40,10 +41,10 @@ const single = (path) => {
  * @param path
  * @param data
  */
-const deletes = (path) => {
-  const url = `${BASE_URL}${path}`;
+const deletes = (path, id) => {
+    const new_url = `${path}/${id}`;
   // const url = `${path}`;
-  return axios.delete(url);
+  return axios.delete(new_url);
 };
 
 /**
@@ -52,7 +53,7 @@ const deletes = (path) => {
  * @returns {Observable<any>}
  */
 const getAll = (path) => {
-  const new_url = `${BASE_URL}${path}`;
+    const new_url = `${path}`;
   return axios.get(new_url);
 };
 
@@ -66,9 +67,9 @@ const photo = (path) => {
   return new_url;
 };
 
-const publish = (id) => {
-  const new_url = `${BASE_URL}${id}`;
-  return axios.patch(new_url);
+const publish = (path, id, data) => {
+  const new_url = `${path}/${id}`;
+  return axios.patch(new_url, data);
 };
 
 const RequestHandler = {
