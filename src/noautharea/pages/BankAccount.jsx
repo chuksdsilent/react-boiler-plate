@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { TransactionStyle } from "../styles/pages/TransactionStyle";
 
-const BankAccount = ({ goToPassword, goToAddress }) => {
+const BankAccount = ({ goToPassword, goToAddress, inputs, onChangeInputs }) => {
   return (
     <TransactionStyle>
       <div className="__onboarding_password">
@@ -18,12 +18,15 @@ const BankAccount = ({ goToPassword, goToAddress }) => {
               <div className="card-body">
                 <div className="form-group mb-4">
                   <label htmlFor="Account Number" className="mb-2">
-                    Password
+                    Account Number
                   </label>
                   <input
                     type="text"
                     className="form-control"
+                    name="bankAccount"
                     placeholder="Password"
+                    value={inputs.bankAccount}
+                    onChange={onChangeInputs}
                   />
                 </div>
                 <div className="form-group mb-4">
@@ -31,14 +34,16 @@ const BankAccount = ({ goToPassword, goToAddress }) => {
                     Select Bank
                   </label>
                   <select
-                    name=""
+                    name="bank"
                     id=""
                     className="w-100"
                     style={{ height: "2.5rem" }}
+                    value={inputs.bank}
+                    onChange={onChangeInputs}
                   >
-                    <option value="">Select Bank</option>
-                    <option value="">Access Bank</option>
-                    <option value="">Zenith Bank</option>
+                    <option>Select Bank</option>
+                    <option value="Access Bank">Access Bank</option>
+                    <option value="Zenith Bank">Zenith Bank</option>
                   </select>
                 </div>
                 <div className="form-group mb-4">
@@ -49,6 +54,9 @@ const BankAccount = ({ goToPassword, goToAddress }) => {
                     type="text"
                     className="form-control"
                     placeholder="Name"
+                    name="name"
+                    value={inputs.name}
+                    onChange={onChangeInputs}
                   />
                 </div>
                 <div className="d-flex justify-content-between">
@@ -58,9 +66,13 @@ const BankAccount = ({ goToPassword, goToAddress }) => {
                   >
                     Back
                   </button>
-                 
-                  <button 
-                   onClick={goToAddress}className="btn btn-primary mb-4 mr-2">Next</button>
+
+                  <button
+                    onClick={goToAddress}
+                    className="btn btn-primary mb-4 mr-2"
+                  >
+                    Next
+                  </button>
                 </div>
               </div>
             </div>

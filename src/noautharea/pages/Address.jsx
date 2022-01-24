@@ -3,7 +3,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import { TransactionStyle } from "../styles/pages/TransactionStyle";
 
-const Address = ({ goToBankAcount }) => {
+const Address = ({ goToBankAcount, inputs, onChangeInputs, handleSubmit }) => {
   return (
     <TransactionStyle>
       <div className="__onboarding_password">
@@ -18,10 +18,12 @@ const Address = ({ goToBankAcount }) => {
               <div className="card-body">
                 <div className="form-group mb-4">
                   <textarea
-                    name=""
+                    name="address"
                     id=""
                     className="form-control"
                     rows="10"
+                    onChange={onChangeInputs}
+                    value={inputs.address}
                   ></textarea>
                 </div>
               </div>
@@ -32,12 +34,17 @@ const Address = ({ goToBankAcount }) => {
                 >
                   Back
                 </button>
-                <button className="btn btn-primary mb-4 mr-4">Next</button>
+                <button
+                  onClick={handleSubmit}
+                  className="btn btn-primary mb-4 mr-4"
+                >
+                  Submit
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </TransactionStyle>
   );

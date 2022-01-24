@@ -15,7 +15,7 @@ const Footer = () => {
         <Col xl={12} xs={24}>
           <div className="ml-3">
             <h4 style={{ marginBottom: 20 }}>ABOUT US</h4>
-            <p>
+            <div>
               EscrowLock is the trusted escrow payment service company that is
               widely used to add buyer-protection or seller-protection to
               transactions. <br />
@@ -26,7 +26,7 @@ const Footer = () => {
               This enhances trust,safety and security in business deals, and
               ensures protection against fraud or scam for the parties involved.
               <Copywright />
-            </p>
+            </div>
           </div>
         </Col>
         <Col xl={7} xs={24}>

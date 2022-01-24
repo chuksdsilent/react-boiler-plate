@@ -3,7 +3,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import { TransactionStyle } from "../styles/pages/TransactionStyle";
 
-const Password = ({ goToBankAcount }) => {
+const Password = ({ goToBankAcount, inputs, onChangeInputs }) => {
   return (
     <TransactionStyle>
       <div className="__onboarding_password">
@@ -24,6 +24,9 @@ const Password = ({ goToBankAcount }) => {
                     type="text"
                     className="form-control"
                     placeholder="Password"
+                    name="password"
+                    value={inputs.password || ""}
+                    onChange={onChangeInputs}
                   />
                 </div>
                 <div className="form-group mb-4">
@@ -34,6 +37,9 @@ const Password = ({ goToBankAcount }) => {
                     type="text"
                     className="form-control"
                     placeholder="Confirm Password"
+                    name="cpassword"
+                    value={inputs.cpassword || ""}
+                    onChange={onChangeInputs}
                   />
                 </div>
                 <div>

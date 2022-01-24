@@ -178,8 +178,7 @@ const Transaction = () => {
     };
 
     setProcessing(true);
-    // axios
-    // .post("http://localhost:8000/api/user/create", formValues)
+    
     UserServices.create(formValues)
       .then((respons) => {
         navigate("/job-completed");

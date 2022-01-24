@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Transaction />} />
         <Route path="/job-completed" element={<JobCompleted />} />
-        <Route path="/email/confirm/:id" element={<Password />} />
+        <Route path="/email/confirm/:id" element={<UserInformation />} />
       </Routes>
     </div>
   );
