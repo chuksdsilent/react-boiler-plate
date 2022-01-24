@@ -28,10 +28,7 @@ const Address = ({ goToBankAcount, inputs, onChangeInputs, handleSubmit }) => {
                 </div>
               </div>
               <div className="d-flex justify-content-between">
-                <button
-                  onClick={goToBankAcount}
-                  className="btn btn-primary mb-4 ml-4"
-                >
+                <button type="submit" className="btn btn-primary mb-4 ml-4">
                   Back
                 </button>
                 <button

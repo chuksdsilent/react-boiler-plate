@@ -1,5 +1,4 @@
 import { UserServices } from "../../services/UserService";
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { Header } from "../styles/components/Header";
@@ -8,11 +7,9 @@ import "react-phone-input-2/lib/style.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { TransactionStyle } from "../styles/pages/TransactionStyle";
-import { Block } from "@material-ui/icons";
 import { DatePicker, Space } from "antd";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-import Icon from "@material-ui/core/Icon";
 import IconButton from "@material-ui/core/IconButton";
 import { convertPicturetoBase64 } from "../../shared/common";
 import { Spin } from "antd";

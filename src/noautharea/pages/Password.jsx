@@ -2,7 +2,6 @@ import Footer from "../components/Footer";
 import React from "react";
 import NavBar from "../components/NavBar";
 import { TransactionStyle } from "../styles/pages/TransactionStyle";
-
 const Password = ({ goToBankAcount, inputs, onChangeInputs }) => {
   return (
     <TransactionStyle>
