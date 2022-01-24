@@ -4,13 +4,15 @@ import BankAccount from "./BankAccount";
 import Address from "./Address";
 import { UserServices } from "../../services/UserService";
 import { Spin } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UserInformation = () => {
   const [page, setPage] = useState(0);
   const [inputs, setInputs] = useState({});
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const goToBankAcount = () => {
     console.log("go to bank...");
     setPage(1);
@@ -39,9 +41,10 @@ const UserInformation = () => {
     if (inputs.password !== inputs.cpassword) return;
     console.log("user information is", inputs);
     setProcessing(true);
-    UserServices.completeRegistration(inputs)
+    const formData = { ...inputs, id };
+    UserServices.completeRegistration(formData)
       .then((response) => {
-        navigate("dashboard");
+        // navigate("users/dashboard");
       })
       .catch((response) => {})
       .finally(() => {
