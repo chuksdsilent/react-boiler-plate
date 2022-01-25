@@ -6,6 +6,8 @@ import { Routes, Route } from "react-router-dom";
 import Password from "./noautharea/pages/Password";
 import axios from "axios";
 import JobCompleted from "./noautharea/pages/JobCompleted";
+import Dashboard from "./autharea/pages/Dashboard";
+
 // axios.defaults.baseURL = "http://localhost:8000/api/";
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Transaction />} />
         <Route path="/job-completed" element={<JobCompleted />} />
+        <Route path="/user/dashboard" element={<Dashboard />} />
         <Route path="/email/confirm/:id" element={<UserInformation />} />
       </Routes>
     </div>

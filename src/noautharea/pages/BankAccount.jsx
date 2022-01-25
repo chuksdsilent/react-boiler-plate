@@ -23,9 +23,9 @@ const BankAccount = ({ goToPassword, goToAddress, inputs, onChangeInputs }) => {
                   <input
                     type="text"
                     className="form-control"
-                    name="bankAccount"
-                    placeholder="Password"
-                    value={inputs.bankAccount}
+                    name="accountNumber"
+                    placeholder="Account Number"
+                    value={inputs.accountNumber}
                     onChange={onChangeInputs}
                   />
                 </div>

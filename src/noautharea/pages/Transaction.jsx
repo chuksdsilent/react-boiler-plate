@@ -175,10 +175,10 @@ const Transaction = () => {
     };
 
     setProcessing(true);
-    
+
     UserServices.create(formValues)
       .then((respons) => {
-        navigate("/job-completed");
+        // navigate("/job-completed");
       })
       .catch((error) => {})
       .finally(() => {

@@ -41,7 +41,7 @@ const UserInformation = () => {
     if (inputs.password !== inputs.cpassword) return;
     console.log("user information is", inputs);
     setProcessing(true);
-    const formData = { ...inputs, id };
+    const formData = { ...inputs, route_id: id };
     UserServices.completeRegistration(formData)
       .then((response) => {
         // navigate("users/dashboard");
