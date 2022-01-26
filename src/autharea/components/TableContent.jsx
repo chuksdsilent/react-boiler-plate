@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Tag, Radio, Space } from "antd";
+import { Table, Tag } from "antd";
 import { Modal, Button } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
@@ -99,7 +99,11 @@ const TableContent = () => {
   };
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <div className="card">
+        <div className="card-body">
+          <Table columns={columns} dataSource={data} />
+        </div>
+      </div>
     </div>
   );
 };

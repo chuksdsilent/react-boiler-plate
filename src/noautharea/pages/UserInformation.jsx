@@ -5,13 +5,14 @@ import Address from "./Address";
 import { UserServices } from "../../services/UserService";
 import { Spin } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 const UserInformation = () => {
   const [page, setPage] = useState(0);
   const [inputs, setInputs] = useState({});
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const goToBankAcount = () => {
     console.log("go to bank...");
@@ -39,12 +40,20 @@ const UserInformation = () => {
     // your code here...
     e.preventDefault();
     if (inputs.password !== inputs.cpassword) return;
-    console.log("user information is", inputs);
     setProcessing(true);
     const formData = { ...inputs, route_id: id };
     UserServices.completeRegistration(formData)
       .then((response) => {
-        // navigate("users/dashboard");
+        localStorage.setItem("token", response.data.token);
+        navigate("/user/dashboard");
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            token: response.data.token,
+          },
+        });
+
+        console.log("Registration Completed...");
       })
       .catch((response) => {})
       .finally(() => {

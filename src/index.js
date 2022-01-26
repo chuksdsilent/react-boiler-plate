@@ -1,4 +1,6 @@
 import React from "react";
+
+import Interceptor from "./services/Interceptor";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -13,7 +15,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
-const store = createStore(rootReducer, composeWithDevTools);
+const store = createStore(rootReducer, composeWithDevTools());
+
+// import HTTP request interceptor
+
+// instantiate interceptor
+new Interceptor().intercept();
+new Interceptor().interceptResponse();
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

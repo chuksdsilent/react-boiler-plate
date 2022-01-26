@@ -4,4 +4,7 @@ export const API_URLS = {
     completeRegistration: "complete-registration",
     authenticate: "login",
   },
+  pending: {
+    all: "transaction/pending",
+  },
 };
