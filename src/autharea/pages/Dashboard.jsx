@@ -5,19 +5,99 @@ import Footer from "../../noautharea/components/Footer";
 import TableContent from "../components/TableContent";
 import { PendingServices } from "../../services/PendingService";
 
+import { Modal, Button } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Skeleton } from "antd";
+
+import MainContent from "../components/MainContent";
+
 const Dashboard = () => {
-  const [processing, setProcessing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+  const { confirm } = Modal;
 
   useEffect(() => {
-    setProcessing(true);
+    setLoading(true);
     PendingServices.allPendingTransaction()
-      .then((response) => {})
+      .then((response) => {
+        setTransactions(response.data.data);
+      })
       .catch((error) => {})
-      .catch(() => {
-        setProcessing(false);
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
+  const columns = [
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+    },
+    {
+      title: "Product Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Details",
+      dataIndex: "details",
+      key: "details",
+    },
+    {
+      title: "role",
+      dataIndex: "role",
+      key: "role",
+    },
+    {
+      title: "Due Date",
+      dataIndex: "due_date",
+      key: "due_date",
+    },
+    {
+      title: "Date",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
+    {
+      title: "cost",
+      dataIndex: "cost",
+      key: "cost",
+    },
+
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <button onClick={showPropsConfirm} className="btn btn-primary">
+          Delete
+        </button>
+      ),
+    },
+  ];
+
+  const showPropsConfirm = () => {
+    confirm({
+      title: "Are you sure delete this task?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      okText: "Delete",
+      okType: "danger",
+      okButtonProps: {
+        disabled: false,
+      },
+      cancelText: "No",
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        }).catch(() => console.log("Oops errors!"));
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+  console.log("transaction is ", transactions);
   return (
     <div className="__dashboard">
       <Navbar />
@@ -27,8 +107,18 @@ const Dashboard = () => {
           <Sidebar />
         </div>
         <div className="col-md-10">
-          <div className="__main-content">
-            <TableContent />
+          <div className="container">
+            <MainContent>
+              <div className="__main-content">
+                <Skeleton loading={loading} active>
+                  <TableContent
+                    title={"Pending Transactions"}
+                    columns={columns}
+                    transactions={transactions}
+                  />
+                </Skeleton>
+              </div>
+            </MainContent>
           </div>
         </div>
       </div>

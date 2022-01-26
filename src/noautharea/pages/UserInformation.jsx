@@ -50,6 +50,7 @@ const UserInformation = () => {
           type: "LOGIN",
           payload: {
             token: response.data.token,
+            user: response.data.user[0],
           },
         });
 

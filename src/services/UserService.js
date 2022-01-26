@@ -11,6 +11,9 @@ class UserService {
   authenticate(data) {
     return RequestHandler.post(API_URLS.user.authenticate, data);
   }
+  getUser(data) {
+    return RequestHandler.post(API_URLS.user.all, data);
+  }
 }
 
 export const UserServices = new UserService();

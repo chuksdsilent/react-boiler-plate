@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import "./assets/styles/General.css";
 import Transaction from "./noautharea/pages/Transaction";
 import Footer from "./noautharea/components/Footer";
@@ -7,9 +8,25 @@ import Password from "./noautharea/pages/Password";
 import axios from "axios";
 import JobCompleted from "./noautharea/pages/JobCompleted";
 import Dashboard from "./autharea/pages/Dashboard";
-
+import { UserServices } from "./services/UserService";
+import { useDispatch } from "react-redux";
 // axios.defaults.baseURL = "http://localhost:8000/api/";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    UserServices.getUser({ token: localStorage.getItem("token") })
+      .then((response) => {
+        console.log("user information is", response.data.data);
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            user: response.data.data[0],
+          },
+        });
+      })
+      .catch((error) => {})
+      .finally(() => {});
+  }, []);
   return (
     <div className="App">
       {/* <UserInformation /> */}
