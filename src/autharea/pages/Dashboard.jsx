@@ -69,18 +69,22 @@ const Dashboard = () => {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <button onClick={showPropsConfirm} className="btn btn-primary">
-          Delete
+        <button
+          onClick={() => showPropsConfirm(record)}
+          className="btn btn-sm btn-danger"
+        >
+          Cancel
         </button>
       ),
     },
   ];
 
-  const showPropsConfirm = () => {
+  const showPropsConfirm = (data) => {
     confirm({
-      title: "Are you sure delete this task?",
+      title: "Are you sure Cancel this transaction?",
       icon: <ExclamationCircleOutlined />,
-      content: "Some descriptions",
+      content:
+        "This transaction cannot be reversed when cancelled. Do you still want to continue?",
       okText: "Delete",
       okType: "danger",
       okButtonProps: {
@@ -89,6 +93,8 @@ const Dashboard = () => {
       cancelText: "No",
       onOk() {
         return new Promise((resolve, reject) => {
+          console.log("deleting the", data.key);
+
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
         }).catch(() => console.log("Oops errors!"));
       },
