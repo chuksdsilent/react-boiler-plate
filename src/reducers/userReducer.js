@@ -1,4 +1,4 @@
-export function userReducer(state = null, action) {
+export function userReducer(state = { token: "", user: {} }, action) {
   switch (action.type) {
     case "LOGIN":
       return action.payload;

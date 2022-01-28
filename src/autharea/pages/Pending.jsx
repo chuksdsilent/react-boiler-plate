@@ -104,7 +104,7 @@ const Pending = () => {
               }
             })
             .catch((error) => {
-              // toast("Error: something went wrong");
+              toast("Error: something went wrong");
               reject();
             })
             .finally(() => {
