@@ -5,6 +5,9 @@ class UserService {
   create(data) {
     return RequestHandler.post(API_URLS.user.create, data);
   }
+  addFund(data) {
+    return RequestHandler.post(API_URLS.user.add, data);
+  }
   completeRegistration(data) {
     return RequestHandler.post(API_URLS.user.completeRegistration, data);
   }

@@ -27,12 +27,12 @@ const get = (path, token) => {
  * @returns {Observable<any>}
  */
 const put = (path, id, data) => {
-  const new_url = `${path}/${id}`;
+  const new_url = `${BASE_URL}${path}/${id}`;
   return axios.patch(new_url, data);
 };
 
 const single = (path) => {
-  const new_url = `${path}`;
+  const new_url = `${BASE_URL}${path}`;
   return axios.get(new_url);
 };
 
@@ -42,7 +42,7 @@ const single = (path) => {
  * @param data
  */
 const deletes = (path, id) => {
-  const new_url = `${path}/${id}`;
+  const new_url = `${BASE_URL}${path}/${id}`;
   // const url = `${path}`;
   return axios.delete(new_url);
 };
@@ -53,7 +53,7 @@ const deletes = (path, id) => {
  * @returns {Observable<any>}
  */
 const getAll = (path) => {
-  const new_url = `${path}`;
+  const new_url = `${BASE_URL}${path}`;
   return axios.get(new_url);
 };
 
@@ -68,7 +68,7 @@ const photo = (path) => {
 };
 
 const publish = (path, id, data) => {
-  const new_url = `${path}/${id}`;
+  const new_url = `${BASE_URL}${path}/${id}`;
   return axios.patch(new_url, data);
 };
 

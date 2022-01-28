@@ -4,8 +4,10 @@ export const API_URLS = {
     completeRegistration: "complete-registration",
     authenticate: "login",
     all: "user/user-information",
+    add: "user/add-fund",
   },
   pending: {
     all: "user/transaction/pending",
+    cancel: "user/transaction/pending/cancel",
   },
 };

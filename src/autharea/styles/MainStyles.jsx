@@ -9,6 +9,9 @@ export const MainStyles = styled.div`
     background-color: #eee;
   }
 
+  .width-card {
+    width: 50%;
+  }
   /* &:hover {
     transition: 0.5s all ease-out;
     background-color: palevioletred;

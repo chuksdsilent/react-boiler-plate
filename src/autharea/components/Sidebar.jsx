@@ -7,7 +7,7 @@ const Sidebar = () => {
       <div className="__sidebar">
         <ul>
           <li>
-            <Link to="user/ashboard">Dashboard</Link>
+            d<Link to="/user/dashboard">Dashboard</Link>
           </li>
           <li>
             <Link to="/user/transaction/pending">Pending</Link>

@@ -10,6 +10,8 @@ import JobCompleted from "./noautharea/pages/JobCompleted";
 import Dashboard from "./autharea/pages/Dashboard";
 import { UserServices } from "./services/UserService";
 import { useDispatch } from "react-redux";
+import Pending from "./autharea/pages/Pending";
+import AddFund from "./autharea/pages/AddFund";
 // axios.defaults.baseURL = "http://localhost:8000/api/";
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +37,8 @@ function App() {
         <Route path="/job-completed" element={<JobCompleted />} />
         <Route path="/user/dashboard" element={<Dashboard />} />
         <Route path="/email/confirm/:id" element={<UserInformation />} />
+        <Route path="/user/transaction/pending" element={<Pending />} />
+        <Route path="/user/add-fund/:id" element={<AddFund />} />
       </Routes>
     </div>
   );

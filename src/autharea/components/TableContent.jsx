@@ -6,7 +6,7 @@ const TableContent = ({ title, columns, transactions }) => {
     <div>
       <h3>{title}</h3>
       {transactions ? (
-        <Table columns={columns} dataSource={transactions} />
+        <Table columns={columns} size="small" dataSource={transactions} />
       ) : (
         ""
       )}

@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
 const store = createStore(rootReducer, composeWithDevTools());
 
 // import HTTP request interceptor
