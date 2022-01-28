@@ -4,14 +4,15 @@ import Navbar from "../../noautharea/components/NavBar";
 import Footer from "../../noautharea/components/Footer";
 import TableContent from "../components/TableContent";
 import { PendingServices } from "../../services/PendingService";
-
-import { Modal, Button } from "antd";
+import { useNavigate, Link } from "react-router-dom";
+import { Modal, Dropdown, Button, Space, Menu } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
 
 import MainContent from "../components/MainContent";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const { confirm } = Modal;
@@ -29,6 +30,11 @@ const Dashboard = () => {
   }, []);
 
   const columns = [
+    {
+      title: "Date",
+      dataIndex: "created_at",
+      key: "created_at",
+    },
     {
       title: "Category",
       dataIndex: "category",
@@ -55,12 +61,7 @@ const Dashboard = () => {
       key: "due_date",
     },
     {
-      title: "Date",
-      dataIndex: "created_at",
-      key: "created_at",
-    },
-    {
-      title: "cost",
+      title: "Cost",
       dataIndex: "cost",
       key: "cost",
     },
@@ -69,12 +70,11 @@ const Dashboard = () => {
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <button
-          onClick={() => showPropsConfirm(record)}
-          className="btn btn-sm btn-danger"
-        >
-          Cancel
-        </button>
+        <Space>
+          <Dropdown overlay={menu(record)} placement="bottomLeft">
+            <Button>More Action</Button>
+          </Dropdown>
+        </Space>
       ),
     },
   ];
@@ -103,7 +103,30 @@ const Dashboard = () => {
       },
     });
   };
+
   console.log("transaction is ", transactions);
+
+  const goToAddFundPage = (data) => {
+    console.log("the id is ", data);
+    navigate(`/user/add-fund/${data.key}`);
+  };
+  const menu = (data) => (
+    <Menu>
+      <Menu.Item>
+        <button onClick={() => showPropsConfirm(data)} className="btn">
+          Cancel
+        </button>
+      </Menu.Item>
+      <Menu.Item>
+        <button onClick={() => goToAddFundPage(data)} className="btn">
+          Add Fund
+        </button>
+      </Menu.Item>
+      <Menu.Item>
+        <button className="btn">View</button>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <div className="__dashboard">
       <Navbar />
