@@ -1,4 +1,6 @@
 import React from "react";
+
+import Interceptor from "./services/Interceptor";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -12,12 +14,23 @@ import rootReducer from "./reducers";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
-const store = createStore(rootReducer, composeWithDevTools);
+import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+const store = createStore(rootReducer, composeWithDevTools());
+
+// import HTTP request interceptor
+
+// instantiate interceptor
+new Interceptor().intercept();
+new Interceptor().interceptResponse();
+
 ReactDOM.render(
   <Provider store={store}>
-    <Theme>
-      <App />
-    </Theme>
+    <BrowserRouter>
+      <Theme>
+        <App />
+      </Theme>
+    </BrowserRouter>
   </Provider>,
 
   document.getElementById("root")

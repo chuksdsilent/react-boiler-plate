@@ -8,14 +8,19 @@ const NavBar = () => {
     <div>
       <NavStyle>
         <div className="__no-auth-desktop">
-          <a href="https://www.escrowlock.com/">
+          <a
+            href="https://www.escrowlock.com/"
+            style={{ width: "150px !important" }}
+          >
             <Logo />
           </a>
-          <a href="https://www.escrowlock.com">HOME</a>
-          <a href="https://www.escrowlock.com/about-escrowlock">ABOUT</a>
-          <a href="https://www.escrowlock.com/chukwudi/">START TRANSACTION</a>
-          <a href="https://www.escrowlock.com/fees-and-charges/">FEES</a>
-          <a href="https://www.escrowlock.com/contact-escrowlock/">CONTACT</a>
+          <div>
+            <a href="https://www.escrowlock.com">HOME</a>
+            <a href="https://www.escrowlock.com/about-escrowlock">ABOUT</a>
+            <a href="https://www.escrowlock.com/chukwudi/">START TRANSACTION</a>
+            <a href="https://www.escrowlock.com/fees-and-charges/">FEES</a>
+            <a href="https://www.escrowlock.com/contact-escrowlock/">CONTACT</a>
+          </div>
         </div>
         <div className="__no-auth-mobile">
           <div className="mobile-nav d-flex  align-items-center justify-content-between">

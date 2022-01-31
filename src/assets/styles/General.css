@@ -4,3 +4,11 @@ body {
 textarea {
   margin: 0px !important;
 }
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.col-md-2 {
+  margin: 0px;
+  padding: 0px;
+}

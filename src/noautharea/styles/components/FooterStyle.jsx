@@ -6,6 +6,7 @@ export const FooterStyle = styled.section`
   padding: 5rem 0rem;
   color: #fff;
   font-size: 16px;
+  margin-top: 3rem;
 
   h4 {
     color: #ffffff;
