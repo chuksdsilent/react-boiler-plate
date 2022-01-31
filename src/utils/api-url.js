@@ -9,5 +9,6 @@ export const API_URLS = {
   pending: {
     all: "user/transaction/pending",
     cancel: "user/transaction/pending/cancel",
+    getTransaction: "user/transaction/pending/get-transaction",
   },
 };

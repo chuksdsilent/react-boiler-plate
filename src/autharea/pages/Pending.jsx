@@ -84,7 +84,7 @@ const Pending = () => {
       icon: <ExclamationCircleOutlined />,
       content:
         "This transaction cannot be reversed when cancelled. Do you still want to continue?",
-      okText: "Delete",
+      okText: "Cancel",
       okType: "danger",
       okButtonProps: {
         disabled: false,
@@ -124,6 +124,10 @@ const Pending = () => {
     console.log("the id is ", data);
     navigate(`/user/add-fund/${data.key}`);
   };
+  const viewTransaction = (data) => {
+    console.log("the id is ", data);
+    navigate(`/user/transaction/${data.key}`);
+  };
   const menu = (data) => (
     <Menu>
       <Menu.Item>
@@ -137,7 +141,9 @@ const Pending = () => {
         </button>
       </Menu.Item>
       <Menu.Item>
-        <button className="btn">View</button>
+        <button onClick={() => viewTransaction(data)} className="btn">
+          View
+        </button>
       </Menu.Item>
     </Menu>
   );

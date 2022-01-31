@@ -8,6 +8,9 @@ class PendingService {
   cancelTransaction(id, data) {
     return RequestHandler.put(API_URLS.pending.cancel, id, data);
   }
+  getPendingTransaction(url) {
+    return RequestHandler.single(url);
+  }
 }
 
 export const PendingServices = new PendingService();
