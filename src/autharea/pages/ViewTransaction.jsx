@@ -4,22 +4,22 @@ import MainContent from "../components/MainContent";
 import { Spin, Modal, Dropdown, Button, Space, Menu, message } from "antd";
 import Sidebar from "../components/Sidebar";
 import React, { useState, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { PendingServices } from "../../services/PendingService";
 import { useSelector } from "react-redux";
 
-const ViewTransaction = () => {
+const ViewTransaction = ({ url }) => {
   const [loading, setLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const params = useParams();
   const user_id = useSelector((state) => state.user.user.id);
   console.log("user selector is ", user_id);
+  console.log("the url is ", url);
   useEffect(() => {
     setLoading(true);
     if (user_id) {
       PendingServices.getPendingTransaction(
-        `user/transaction/pending/get-transaction/${params.id}?user_id=${user_id}`
+        `${url}/${params.id}?user_id=${user_id}`
       )
         .then((response) => {
           setTransactions(response.data.data);
@@ -29,11 +29,10 @@ const ViewTransaction = () => {
           setLoading(false);
         });
     }
-  }, [user_id]);
+  }, [user_id, url]);
 
   return (
     <div className="__view_transaction">
-      <ToastContainer />
       <Spin spinning={loading} delay={500}>
         <Navbar />
         <div className="d-flex">
@@ -48,12 +47,15 @@ const ViewTransaction = () => {
               >
                 <div className="card">
                   <div className="card-body">
-                    <div className="display-4">Transaction Details</div>
+                    <div className="d-flex justify-content-between">
+                      <h3>Transaction Details</h3>
+                      <button className="btn btn-primary">Completed</button>
+                    </div>
                     <hr className="mb-3" />
                     {transactions.map((transaction) => {
                       return (
                         <div>
-                          <div className="row mt-4">
+                          <div className="row mt-4" key={transaction.key}>
                             <div className="col-12 col-md-4">
                               <h5>Category</h5>
                               {transaction.category}
